@@ -1,0 +1,17 @@
+{
+  "name": "p01-pulso",
+  "private": true,
+  "description": "Exemplo: lançamento conceito do tênis Pulso (demonstração)",
+  "scripts": {
+    "build:m1": "node build.mjs musica1",
+    "build:m2": "node build.mjs musica2",
+    "render:m1": "node build.mjs musica1 && hyperframes render --fps 60 --quality high -o ./saida/p01-pulso-musica1.mp4",
+    "render:m2": "node build.mjs musica2 && hyperframes render --fps 60 --quality high -o ./saida/p01-pulso-musica2.mp4",
+    "lint": "hyperframes lint .",
+    "check": "hyperframes check"
+  },
+  "devDependencies": {
+    "gsap": "3.12.5",
+    "hyperframes": "0.8.166"
+  }
+}

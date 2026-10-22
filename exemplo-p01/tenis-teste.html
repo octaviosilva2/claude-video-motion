@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>P01 · Teste do tênis</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  /* Paleta do motion: preto, branco, neon */
+  :root{
+    --preto:#0A0A0B; --branco:#F4F3EF; --neon:#D4FF3A;
+    --papel:#EDE6D5; --grafite:#1C1C20; --azul:#1B3ED2;
+  }
+  html,body{margin:0;height:100%;background:#000;overflow:hidden}
+  /* Quadro vertical 1080x1920, escalado para caber na janela */
+  #stage{position:absolute;left:50%;top:50%;width:1080px;height:1920px;transform-origin:center;overflow:hidden;background:var(--papel)}
+  .bg{position:absolute;inset:0}
+  #bg-papel{background:var(--papel)}
+  #bg-azul{background:var(--azul);opacity:0}
+  #bg-preto{background:radial-gradient(120% 70% at 50% 46%,#1c1c20 0%,var(--preto) 62%);opacity:0}
+  /* Grade de desenho técnico */
+  .grade{position:absolute;inset:0;background-size:60px 60px}
+  #grade-papel{background-image:linear-gradient(rgba(27,62,210,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(27,62,210,.13) 1px,transparent 1px)}
+  #grade-azul{opacity:0;background-image:linear-gradient(rgba(255,255,255,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.14) 1px,transparent 1px)}
+  #tenis{position:absolute;left:30px;top:600px;width:1020px;height:530px;overflow:visible}
+  .label{position:absolute;font:700 26px/1.3 'JetBrains Mono',monospace;letter-spacing:.14em;color:#fff;opacity:0;white-space:nowrap}
+  .label b{color:var(--neon);font-weight:700}
+  #nome{position:absolute;left:0;right:0;top:1300px;text-align:center;font:400 150px/1 Anton,sans-serif;letter-spacing:.02em;color:var(--branco);opacity:0}
+  #canto{position:absolute;left:150px;top:120px;font:700 24px/1 'JetBrains Mono',monospace;letter-spacing:.3em;color:var(--grafite);opacity:.7}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="bg" id="bg-papel"></div>
+  <div class="grade" id="grade-papel"></div>
+  <div class="bg" id="bg-azul"></div>
+  <div class="grade" id="grade-azul"></div>
+  <div class="bg" id="bg-preto"></div>
+  <div id="canto">ESBOÇO · 01</div>
+
+  <svg id="tenis" viewBox="0 0 1000 520">
+    <defs>
+      <linearGradient id="g-sola" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffffff"/><stop offset=".6" stop-color="#ececE8"/><stop offset="1" stop-color="#bdbdb7"/>
+      </linearGradient>
+      <linearGradient id="g-cabedal" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#5a5a63"/><stop offset=".45" stop-color="#34343b"/><stop offset="1" stop-color="#1c1c21"/>
+      </linearGradient>
+      <linearGradient id="g-swoosh" x1="0" y1="1" x2="1" y2="0">
+        <stop offset="0" stop-color="#c4f224"/><stop offset="1" stop-color="#ecff7a"/>
+      </linearGradient>
+      <linearGradient id="g-faixa" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#9fd010"/><stop offset=".5" stop-color="#D4FF3A"/><stop offset="1" stop-color="#9fd010"/>
+      </linearGradient>
+      <linearGradient id="g-luz" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+      </linearGradient>
+      <!-- Textura de malha do cabedal -->
+      <pattern id="malha" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
+        <circle cx="2" cy="2" r="1.2" fill="#fff" fill-opacity=".1"/>
+      </pattern>
+      <clipPath id="clip-cabedal"><path class="d-cabedal"/></clipPath>
+      <clipPath id="clip-tenis"><path class="d-cabedal"/><path class="d-sola"/></clipPath>
+      <radialGradient id="g-sombra"><stop offset="0" stop-color="#000" stop-opacity=".65"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+    </defs>
+
+    <ellipse id="sombra" cx="500" cy="464" rx="480" ry="24" fill="url(#g-sombra)" opacity="0"/>
+
+    <!-- Tênis pronto (formas cheias) -->
+    <g id="cheio" opacity="0">
+      <path class="d-solado" fill="#141416"/>
+      <path class="d-sola" fill="url(#g-sola)"/>
+      <path class="d-faixa" fill="url(#g-faixa)"/>
+      <path class="d-sulco" fill="none" stroke="#c8c8c2" stroke-width="2"/>
+      <path class="d-lingua" fill="#6a6a73"/>
+      <path class="d-cabedal" fill="url(#g-cabedal)"/>
+      <path class="d-cabedal" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="2.5"/>
+      <path class="d-juncao" fill="none" stroke="#000" stroke-opacity=".35" stroke-width="6"/>
+      <g clip-path="url(#clip-cabedal)">
+        <rect width="1000" height="520" fill="url(#malha)"/>
+        <path class="d-calcanhar" fill="#141418"/>
+        <path class="d-biqueira" fill="#26262c"/>
+        <path class="d-ilhoses" fill="#141418"/>
+      </g>
+      <path class="d-costura" fill="none" stroke="#55555c" stroke-width="2" stroke-dasharray="6 6"/>
+      <path class="d-gola" fill="none" stroke="#2c2c31" stroke-width="10" stroke-linecap="round"/>
+      <path class="d-puxador" fill="none" stroke="var(--neon)" stroke-width="7" stroke-linecap="round"/>
+      <path class="d-swoosh" fill="url(#g-swoosh)"/>
+      <g class="cadarcos" fill="none" stroke="#efefea" stroke-width="9" stroke-linecap="round"></g>
+      <g clip-path="url(#clip-tenis)">
+        <rect id="luz" x="-300" y="40" width="200" height="460" fill="url(#g-luz)" transform="skewX(-18)"/>
+      </g>
+    </g>
+
+    <!-- Traços: os mesmos contornos, desenhados linha a linha -->
+    <g id="tracos" fill="none" stroke="var(--grafite)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+      <path class="tr d-sola"/>
+      <path class="tr d-solado"/>
+      <path class="tr d-faixa"/>
+      <path class="tr d-lingua"/>
+      <path class="tr d-cabedal"/>
+      <path class="tr d-calcanhar"/>
+      <path class="tr d-biqueira"/>
+      <path class="tr d-ilhoses"/>
+      <path class="tr d-swoosh"/>
+      <path class="tr d-cadarco-tr"/>
+      <path class="tr d-puxador"/>
+    </g>
+
+    <!-- Cotas da planta técnica -->
+    <g id="cotas" stroke="#fff" stroke-width="2" fill="none" opacity="0">
+      <path stroke-dasharray="8 8" d="M40 492 H976"/><path d="M40 480 v24 M976 480 v24"/>
+      <path stroke-dasharray="8 8" d="M998 310 V450"/><path d="M986 310 h24 M986 450 h24"/>
+      <path stroke-dasharray="6 6" d="M772 220 L850 140"/><circle cx="772" cy="220" r="9"/>
+    </g>
+  </svg>
+
+  <div class="label" id="l1" style="left:380px;top:1150px">COMPRIMENTO · <b>287 MM</b></div>
+  <div class="label" id="l2" style="left:800px;top:1075px">STACK · <b>40 MM</b></div>
+  <div class="label" id="l3" style="left:790px;top:640px">SWOOSH<br><b>22°</b></div>
+
+  <div id="nome">PULSO</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+  // Encaixa o quadro de 1080x1920 na janela
+  const stage = document.getElementById('stage');
+  function fit(){ const s=Math.min(innerWidth/1080, innerHeight/1920); stage.style.transform=`translate(-50%,-50%) scale(${s})`; }
+  addEventListener('resize', fit); fit();
+
+  // Desenho do tênis de corrida, vista lateral, bico para a ESQUERDA (como nas fotos de produto).
+  // Proporções estudadas em tênis de corrida reais; desenho todo autoral, sem imagem da marca.
+  const D = {
+    // entressola: calcanhar alto e arredondado, bico levantado (rocker)
+    sola: 'M70 350 C48 354 40 368 52 384 C90 422 170 446 260 448 L820 450 C900 450 950 438 966 412 C980 388 980 340 968 310 C900 316 820 322 740 330 C600 344 420 356 260 358 C180 358 120 354 70 350 Z',
+    solado: 'M52 384 C90 422 170 446 260 448 L820 450 C900 450 950 438 966 412 L970 424 C952 452 902 464 820 464 L260 462 C166 460 86 432 50 396 Z',
+    faixa: 'M170 420 C360 432 640 434 900 420 C920 418 930 410 922 406 C660 416 360 414 180 408 C166 408 160 418 170 420 Z',
+    sulco: 'M90 380 C300 390 620 388 950 350',
+    juncao: 'M70 350 C120 354 180 358 260 358 C420 356 600 344 740 330 C820 322 900 316 968 310',
+    // cabedal: bico arredondado, peito do pé alto, gola acolchoada, calcanhar com aba
+    cabedal: 'M70 350 C40 340 36 310 70 296 C120 274 200 262 280 250 C380 232 520 180 660 122 C676 116 692 114 704 118 C700 98 712 84 728 88 C744 92 748 108 740 124 C776 146 812 156 840 146 C880 130 908 92 926 66 C934 56 948 58 950 70 C962 130 976 230 968 310 C900 316 820 322 740 330 C600 344 420 356 260 358 C180 358 120 354 70 350 Z',
+    calcanhar: 'M800 326 C786 250 800 186 840 146 C880 130 908 92 926 66 C934 56 948 58 950 70 C962 130 976 230 968 310 C910 316 850 322 800 326 Z',
+    biqueira: 'M70 350 C40 340 36 310 70 296 C100 284 140 276 180 270 C160 296 158 330 170 356 C130 354 100 352 70 350 Z',
+    ilhoses: 'M300 248 C400 228 530 176 664 120 L684 150 C556 206 424 262 320 282 Z',
+    lingua: 'M296 240 C398 220 528 168 662 112 C690 100 714 90 732 88 L736 104 C716 110 694 120 668 130 C536 186 404 238 304 258 Z',
+    // swoosh: curva perto da frente, ponta subindo em direção ao calcanhar
+    swoosh: 'M330 292 C292 312 292 348 344 346 C396 344 470 322 772 220 C520 298 432 318 392 316 C356 314 338 306 330 292 Z',
+    puxador: 'M940 64 C944 36 962 32 970 44 C976 54 968 66 958 70',
+    costura: 'M744 130 C780 154 814 162 844 152 C882 136 906 104 922 82',
+    gola: 'M742 126 C778 150 812 158 842 148 C878 134 902 100 918 78',
+  };
+  // Cadarços: barras curtas cruzando o peito do pé, do meio do pé até o tornozelo
+  const laces = [[320,246],[384,230],[448,208],[512,184],[576,156],[636,130]];
+  D['cadarco-tr'] = laces.map(([x,y])=>`M${x} ${y} l-24 -18`).join(' ');
+  for (const [k,d] of Object.entries(D)) document.querySelectorAll('.d-'+k).forEach(p=>p.setAttribute('d', d));
+  const g = document.querySelector('.cadarcos');
+  laces.forEach(([x,y])=>{ const p=document.createElementNS('http://www.w3.org/2000/svg','path'); p.setAttribute('d',`M${x} ${y} l-24 -18`); g.appendChild(p); });
+  document.querySelectorAll('.tr').forEach(p=>p.setAttribute('pathLength','1'));
+
+  // Timeline pausada e finita (modelo do HyperFrames); aqui roda em loop só para o teste
+  const tl = gsap.timeline({paused:true, repeat:-1, repeatDelay:1});
+  const tr = gsap.utils.toArray('.tr');
+  gsap.set(tr, {strokeDasharray:1, strokeDashoffset:1});
+
+  // 1) Esboço a lápis
+  tl.to(tr, {strokeDashoffset:0, duration:.7, ease:'power2.inOut', stagger:.24}, 0)
+  // 2) Planta técnica
+    .addLabel('planta', 3)
+    .to('#bg-azul,#grade-azul', {opacity:1, duration:.25}, 'planta')
+    .to('#tracos', {attr:{stroke:'#ffffff'}, duration:.25}, 'planta')
+    .set('#canto', {textContent:'PLANTA · 02', color:'#fff'}, 'planta')
+    .to('#cotas', {opacity:1, duration:.3}, 'planta+=.2')
+    .to('#l1,#l2,#l3', {opacity:1, y:-10, duration:.3, stagger:.25}, 'planta+=.3')
+  // 3) Tênis pronto
+    .addLabel('pronto', 5)
+    .to('#bg-preto', {opacity:1, duration:.05}, 'pronto')
+    .to('#cotas,.label,#canto,#tracos', {opacity:0, duration:.1}, 'pronto')
+    .fromTo('#cheio', {opacity:0, scale:1.08, rotation:2, transformOrigin:'50% 70%'}, {opacity:1, scale:1, rotation:2, duration:.6, ease:'expo.out'}, 'pronto')
+    .to('#sombra', {opacity:1, duration:.4}, 'pronto')
+    .fromTo('#luz', {attr:{x:-300}}, {attr:{x:1250}, duration:1.1, ease:'power2.inOut'}, 'pronto+=.3')
+    .fromTo('#nome', {opacity:0, y:30}, {opacity:1, y:0, duration:.5, ease:'expo.out'}, 'pronto+=.8')
+    .to({}, {duration:1.5});
+
+  window.__timelines = {tenis: tl};
+  tl.play();
+</script>
+</body>
+</html>

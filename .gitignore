@@ -1,0 +1,17 @@
+# Dependências e saídas geradas
+node_modules/
+exemplo-p01/index.html
+exemplo-p01/saida/
+exemplo-p01/.hyperframes/
+exemplo-p01/.thumbnails/
+
+# Áudio e vídeo de terceiros nunca vão para o repositório (licença)
+*.mp3
+*.wav
+*.mp4
+*.mov
+*.webm
+
+# Segredos
+.env
+**/.env
